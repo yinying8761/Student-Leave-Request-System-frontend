@@ -53,15 +53,15 @@ function logout() {
               <el-icon><Edit /></el-icon>
               <span>发起请假</span>
             </el-menu-item>
-            <el-menu-item index="/approvals" v-if="['ADVISOR','COUNSELOR'].includes(userStore.role)">
+            <el-menu-item index="/approvals" v-if="userStore.role === 'COUNSELOR'">
               <el-icon><Checked /></el-icon>
               <span>待审批</span>
             </el-menu-item>
-            <el-menu-item index="/cancellations" v-if="['ADVISOR','COUNSELOR'].includes(userStore.role)">
+            <el-menu-item index="/cancellations" v-if="userStore.role === 'COUNSELOR'">
               <el-icon><CircleCheck /></el-icon>
               <span>销假管理</span>
             </el-menu-item>
-            <el-menu-item index="/statistics" v-if="['ADVISOR','COUNSELOR','ADMIN'].includes(userStore.role)">
+            <el-menu-item index="/statistics" v-if="['COUNSELOR','ADMIN'].includes(userStore.role)">
               <el-icon><TrendCharts /></el-icon>
               <span>数据统计</span>
             </el-menu-item>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import request from '../utils/request'
 
@@ -13,7 +13,15 @@ const form = ref({
   phone: '', email: '', department: '', className: '', advisorId: null, counselorId: null
 })
 
-const roleLabel = { STUDENT: '学生', ADVISOR: '导师', COUNSELOR: '辅导员', ADMIN: '管理员' }
+const roleLabel = { STUDENT: '学生', COUNSELOR: '辅导员', ADMIN: '管理员' }
+
+const counselors = computed(() => list.value.filter(u => u.role === 'COUNSELOR'))
+
+watch(() => form.value.role, (val) => {
+  if (val !== 'STUDENT') {
+    form.value.counselorId = null
+  }
+})
 
 async function fetchData() {
   loading.value = true
@@ -91,7 +99,7 @@ onMounted(fetchData)
         <el-form-item label="角色" required>
           <el-select v-model="form.role">
             <el-option label="学生" value="STUDENT" />
-            <el-option label="导师" value="ADVISOR" />
+
             <el-option label="辅导员" value="COUNSELOR" />
             <el-option label="管理员" value="ADMIN" />
           </el-select>
@@ -99,6 +107,11 @@ onMounted(fetchData)
         <el-form-item label="手机号"><el-input v-model="form.phone" /></el-form-item>
         <el-form-item label="院系"><el-input v-model="form.department" /></el-form-item>
         <el-form-item label="班级"><el-input v-model="form.className" /></el-form-item>
+        <el-form-item label="辅导员" v-if="form.role === 'STUDENT'">
+          <el-select v-model="form.counselorId" clearable placeholder="请选择辅导员">
+            <el-option v-for="u in counselors" :key="u.id" :label="u.realName" :value="u.id" />
+          </el-select>
+        </el-form-item>
       </el-form>
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>

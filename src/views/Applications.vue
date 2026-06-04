@@ -9,7 +9,7 @@ const loading = ref(false)
 const page = ref({ current: 1, size: 10, total: 0 })
 
 const typeLabel = { PERSONAL: '事假', SICK: '病假', OFFICIAL: '公假', OTHER: '其他' }
-const statusLabel = { PENDING_ADVISOR: '待导师审', PENDING_COUNSELOR: '待辅导员审', APPROVED: '已通过', REJECTED: '已驳回', CANCELLING: '销假中', CANCELLED: '已销假' }
+const statusLabel = { PENDING: '待审批', APPROVED: '已通过', REJECTED: '已驳回', CANCELLING: '销假中', CANCELLED: '已销假' }
 
 async function fetchData() {
   loading.value = true

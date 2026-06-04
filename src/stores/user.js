@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 
 const ROLE_LABEL = {
   STUDENT: '学生',
-  ADVISOR: '导师',
   COUNSELOR: '辅导员',
   ADMIN: '管理员'
 }
