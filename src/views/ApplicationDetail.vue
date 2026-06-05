@@ -27,8 +27,17 @@ onMounted(async () => {
         </el-descriptions-item>
         <el-descriptions-item label="开始时间">{{ app.startTime }}</el-descriptions-item>
         <el-descriptions-item label="结束时间">{{ app.endTime }}</el-descriptions-item>
+        <el-descriptions-item label="是否离校">
+          <el-tag :type="app.isLeaveCampus ? 'warning' : 'info'">{{ app.isLeaveCampus ? '是' : '否' }}</el-tag>
+        </el-descriptions-item>
+        <el-descriptions-item v-if="app.isLeaveCampus" label="目的地">
+          {{ app.destinationProvince }} {{ app.destinationCity }} {{ app.destinationDistrict }} {{ app.destinationDetail }}
+        </el-descriptions-item>
         <el-descriptions-item label="天数">{{ app.durationDays }}天</el-descriptions-item>
         <el-descriptions-item label="学生">{{ app.studentName }}</el-descriptions-item>
+        <el-descriptions-item label="联系电话">{{ app.contactPhone }}</el-descriptions-item>
+        <el-descriptions-item label="紧急联系人">{{ app.emergencyContactName }}</el-descriptions-item>
+        <el-descriptions-item label="紧急联系人电话">{{ app.emergencyContactPhone }}</el-descriptions-item>
         <el-descriptions-item label="请假原因" :span="2">{{ app.reason }}</el-descriptions-item>
       </el-descriptions>
 
