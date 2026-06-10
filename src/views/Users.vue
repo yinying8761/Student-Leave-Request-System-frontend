@@ -108,7 +108,7 @@ onMounted(fetchData)
         <el-form-item label="院系"><el-input v-model="form.department" /></el-form-item>
         <el-form-item label="班级"><el-input v-model="form.className" /></el-form-item>
         <el-form-item label="辅导员" v-if="form.role === 'STUDENT'">
-          <el-select v-model="form.counselorId" clearable placeholder="请选择辅导员">
+          <el-select v-model="form.counselorId" filterable clearable placeholder="请选择辅导员（可选）">
             <el-option v-for="u in counselors" :key="u.id" :label="u.realName" :value="u.id" />
           </el-select>
         </el-form-item>

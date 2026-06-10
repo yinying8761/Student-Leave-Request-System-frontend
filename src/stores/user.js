@@ -13,7 +13,12 @@ export const useUserStore = defineStore('user', {
     username: '',
     realName: '',
     role: '',
-    department: ''
+    phone: '',
+    email: '',
+    department: '',
+    className: '',
+    counselorId: null,
+    counselorName: ''
   }),
 
   getters: {
@@ -27,7 +32,12 @@ export const useUserStore = defineStore('user', {
       this.username = info.username
       this.realName = info.realName
       this.role = info.role
-      this.department = info.department
+      this.phone = info.phone || ''
+      this.email = info.email || ''
+      this.department = info.department || ''
+      this.className = info.className || ''
+      this.counselorId = info.counselorId || null
+      this.counselorName = info.counselorName || ''
     },
 
     setToken(token) {
@@ -41,7 +51,12 @@ export const useUserStore = defineStore('user', {
       this.username = ''
       this.realName = ''
       this.role = ''
+      this.phone = ''
+      this.email = ''
       this.department = ''
+      this.className = ''
+      this.counselorId = null
+      this.counselorName = ''
       localStorage.removeItem('token')
     }
   }
