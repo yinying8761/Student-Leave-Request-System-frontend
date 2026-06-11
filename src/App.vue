@@ -61,9 +61,9 @@ function logout() {
               <el-icon><CircleCheck /></el-icon>
               <span>销假管理</span>
             </el-menu-item>
-            <el-menu-item index="/statistics" v-if="['COUNSELOR','ADMIN'].includes(userStore.role)">
-              <el-icon><TrendCharts /></el-icon>
-              <span>数据统计</span>
+            <el-menu-item index="/approval-records" v-if="['COUNSELOR','ADMIN'].includes(userStore.role)">
+              <el-icon><Document /></el-icon>
+              <span>审批记录</span>
             </el-menu-item>
             <el-menu-item index="/users" v-if="userStore.role === 'ADMIN'">
               <el-icon><User /></el-icon>

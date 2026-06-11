@@ -6,8 +6,12 @@ import request from '../utils/request'
 const route = useRoute()
 const app = ref({})
 const records = ref([])
-const statusLabel = { PENDING: '待审批', APPROVED: '已通过', REJECTED: '已驳回', CANCELLING: '销假中', CANCELLED: '已销假' }
 const typeLabel = { PERSONAL: '事假', SICK: '病假', OFFICIAL: '公假', OTHER: '其他' }
+function statusLabel(app) {
+  if (!app || !app.status) return ''
+  if (app.status === 'APPROVED') return app.isLeaveCampus ? '请假中（离校）' : '请假中（在校）'
+  return { PENDING: '待审批', REJECTED: '已驳回', CANCELLING: '待销假', CANCELLED: '已销假' }[app.status] || app.status
+}
 
 onMounted(async () => {
   const res = await request.get('/applications/' + route.params.id)
@@ -23,7 +27,7 @@ onMounted(async () => {
       <el-descriptions :column="2" border>
         <el-descriptions-item label="类型">{{ typeLabel[app.leaveType] }}</el-descriptions-item>
         <el-descriptions-item label="状态">
-          <el-tag>{{ statusLabel[app.status] }}</el-tag>
+          <el-tag>{{ statusLabel(app) }}</el-tag>
         </el-descriptions-item>
         <el-descriptions-item label="开始时间">{{ app.startTime }}</el-descriptions-item>
         <el-descriptions-item label="结束时间">{{ app.endTime }}</el-descriptions-item>
